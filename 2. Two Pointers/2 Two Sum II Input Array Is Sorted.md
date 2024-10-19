@@ -1,0 +1,116 @@
+# 2. Two Sum II Input Array Is Sorted
+
+Created: October 19, 2024 8:17 AM
+Status: Easy
+Updated: October 19, 2024 8:49 AM
+
+Given an array of integers `numbers` that is sorted in **non-decreasing order**.
+
+Return the indices (**1-indexed**) of two numbers, `[index1, index2]`, such that they add up to a given target number `target` and `index1 < index2`. 
+
+Note that `index1` and `index2` cannot be equal, therefore you may not use the same element twice.
+
+There will always be **exactly one valid solution**.
+
+Your solution must use O(1) additional space.
+
+**Example 1:**
+
+```python
+Input: numbers = [1,2,3,4], target = 3
+
+Output: [1,2]
+```
+
+Explanation:
+
+The sum of 1 and 2 is 3. Since we are assuming a 1-indexed array, `index1` = 1, `index2` = 2. We return `[1, 2]`.
+
+**Constraints:**
+
+- `2 <= numbers.length <= 1000`
+- `1000 <= numbers[i] <= 1000`
+- `1000 <= target <= 1000`
+
+## Solution
+
+Time Complexity: O(n)  
+
+Space Complexity: O(1)  
+
+```python
+'''
+The Two Pointers algorithm involves using two indices to traverse the array from both ends towards the center. 
+In this solution, we use two pointers to find two numbers that sum up to the target. 
+By adjusting the pointers based on the current sum, we efficiently find the solution in O(n) time complexity.
+'''
+
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        
+        # Initialize two pointers, one at the start and one at the end of the list
+        leftPointer, rightPointer = 0, len(numbers) - 1
+        
+        # Loop until the two pointers meet
+        while leftPointer < rightPointer:
+            
+            # Calculate the current sum of the numbers at the two pointers
+            currentSum = numbers[leftPointer] + numbers[rightPointer]
+            
+            # If the current sum is greater than the target, move the right pointer left
+            if currentSum > target:
+                rightPointer -= 1
+            
+            # If the current sum is less than the target, move the left pointer right
+            elif currentSum < target:
+                leftPointer += 1
+            
+            # If the current sum equals the target, return the 1-indexed positions
+            else:
+                return [leftPointer + 1, rightPointer + 1]
+        
+        # Return an empty list if no solution is found (though the problem guarantees a solution)
+        return []
+```
+
+## Notes
+
+- **Initialization**:
+    - You start with one pointer (`leftPointer`) at the beginning and another pointer (`rightPointer`) at the end of the array. This setup lets you shrink the problem space by either moving the left pointer to the right or the right pointer to the left.
+- **Sum Comparison**:
+    - You compute the sum of the numbers at the two pointers. If the sum is larger than the target, you move the `rightPointer` to the left (to decrease the sum, since the array is sorted). If the sum is smaller, you move the `leftPointer` to the right (to increase the sum).
+- **Termination**:
+    - When the two pointers meet, you either find the solution or conclude there is none. Since the problem guarantees a solution, you will find the correct pair and return their indices.
+- **Efficiency**:
+    - This approach runs in **O(n)** time, where `n` is the length of the array, as each pointer moves inward exactly once.
+- **Why Use Two Pointers?**
+    - The **Two Pointers** technique is useful when dealing with problems where you can efficiently traverse from both ends of a sorted array or list to achieve optimal time complexity. Here's why it works well in problems like **palindrome checking** or **two-sum** in a sorted array
+
+## Example Walkthrough
+
+Let’s consider an example with the input `numbers = [2, 7, 11, 15]` and `target = 9`.
+
+1. **Initialization**:
+    - `leftPointer = 0` (points to `2`)
+    - `rightPointer = 3` (points to `15`)
+2. **First Iteration**:
+    - `currentSum = numbers[leftPointer] + numbers[rightPointer] = 2 + 15 = 17`
+    - Since `currentSum > target`, move the `rightPointer` left: `rightPointer = 2`
+3. **Second Iteration**:
+    - `currentSum = numbers[leftPointer] + numbers[rightPointer] = 2 + 11 = 13`
+    - Again, `currentSum > target`, move the `rightPointer` left: `rightPointer = 1`
+4. **Third Iteration**:
+    - `currentSum = numbers[leftPointer] + numbers[rightPointer] = 2 + 7 = 9`
+    - Now, `currentSum == target`, so return `[leftPointer + 1, rightPointer + 1] = [1, 2]`.
+
+This solution finds the target sum efficiently in **O(n)** time and uses **O(1) space**, satisfying both constraints.
+
+## Edge Cases
+
+- **Single Pair**: If the array contains only two elements, e.g., `numbers = [1, 2]`, the solution should handle this trivially.
+- **No Solution**: The problem guarantees a solution, so this scenario won’t occur in valid inputs.
+- **Negative Numbers**: Ensure the solution handles negative numbers correctly, e.g., `numbers = [-3, 2, 5, 10]`, `target = 7`.
+- **Duplicates**: If the array has duplicate numbers, the solution should still return the correct unique pair, e.g., `numbers = [2, 2, 7, 11]`, `target = 9`.
+- **Target as Sum of Extremes**: Test cases where the sum is formed by the smallest and largest elements, e.g., `numbers = [1, 3, 5, 7, 9]`, `target = 10`.
+
+## Similar Questions
