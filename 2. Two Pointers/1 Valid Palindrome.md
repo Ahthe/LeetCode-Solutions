@@ -56,7 +56,7 @@ class Solution:
 			while r > l and not self.alphaNum(s[r])
 				r -= 1
 					
-			#	Compare characters in lower case manner
+			# Compare characters in lower case manner
 			if s[l].lower() != s[r].lower()
 				
 				return False
@@ -64,7 +64,7 @@ class Solution:
 			# Move both pointers towards the center
 			l, r = l + 1, r - 1
 			
-		#If all characters matched, its a palindrome
+		# If all characters matched, its a palindrome
 		return True
 			
 	def alphaNum(self, char):
