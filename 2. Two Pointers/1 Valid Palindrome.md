@@ -42,35 +42,36 @@ Space Complexity: O(1)  The space complexity is O(1) since we are not using any 
 ```python
 class Solution:
 		def isPalindrome(self, s: str) -> bool:
-				# Initializing two pointers, left and right
-				l, r = 0, len(s) - 1
+			# Initializing two pointers, left and right
+			l, r = 0, len(s) - 1
 				
-				# loop until the two pointers meet
-				while l < r:
+			# loop until the two pointers meet
+			while l < r:
 						
-						# Move the left pointer to the right if its not alphaNum
-						while l < r and not self.alphaNum(s[l])
-								l += 1
+				# Move the left pointer to the right if its not alphaNum
+				while l < r and not self.alphaNum(s[l])
+					l += 1
 						
-						# Move the right pointer to the left if its not alphaNum
-						while r > l and not self.alphaNum(s[r])
-								r -= 1
+				# Move the right pointer to the left if its not alphaNum
+				while r > l and not self.alphaNum(s[r])
+					r -= 1
 						
-						#	Compare characters in lower case manner
-						if s[l].lower() != s[r].lower()
-								return False
+				#	Compare characters in lower case manner
+				if s[l].lower() != s[r].lower()
+					
+					return False
 						
-						# Move both pointers towards the center
-						l, r = l + 1, r - 1
+				# Move both pointers towards the center
+				l, r = l + 1, r - 1
 				
-				#If all characters matched, its a palindrome
-				return True
+			#If all characters matched, its a palindrome
+			return True
 				
 		def alphaNum(self, char):
 			return(
-			ord('A') <= ord('char') <= ord('Z') or	
-			ord('a') <= ord('char') <= ord('z') or
-			ord('0') <= ord('char') <= ord('9')
+				ord('A') <= ord('char') <= ord('Z') or	
+				ord('a') <= ord('char') <= ord('z') or
+				ord('0') <= ord('char') <= ord('9')
 		)
 ```
 
