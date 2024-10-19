@@ -1,4 +1,4 @@
-# 1. Valid Palindrome
+# 1. Valid Palindrome  (Easy)
 
 Created: October 13, 2024 4:50 AM
 Status: Easy
