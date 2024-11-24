@@ -48,8 +48,3 @@ class Board:
             
             return False
         
-
-
-
-class Game:
-
